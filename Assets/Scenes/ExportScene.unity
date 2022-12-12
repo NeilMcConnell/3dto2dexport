@@ -405,6 +405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e28099d7ba0d244084af946268f25b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FPS: 24
   Camera: {fileID: 1119822855}
   ExportObject: {fileID: 313611331}
   ColorShader: {fileID: 0}
