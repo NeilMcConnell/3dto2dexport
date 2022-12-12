@@ -174,7 +174,7 @@ public class ExporterControl : MonoBehaviour
                 {
                     ExportObject.transform.rotation = work.Rotation;
                     var animator = ExportObject.GetComponent<Animator>();
-                    animator.PlayInFixedTime(work.clip.name, -1, work.AnimationTimeSeconds);
+                    animator.Play(work.clip.name, -1, work.AnimationTimeSeconds / work.clip.length);
                     animator.speed = 0;
                     work.CurrentStep++;
                 }
@@ -205,7 +205,22 @@ public class ExporterControl : MonoBehaviour
                 }
                 break;
             case WorkItem.Step.ExportNormal:
-                work.CurrentStep++;
+                {
+
+                    RenderTexture.active = renderTexture;
+                    ExportCamera.targetTexture = renderTexture;
+
+                    ExportCamera.RenderWithShader(NormalShader, null);
+
+                    Texture2D renderedTexture = new Texture2D(ExportWidth, ExportHeight, TextureFormat.ARGB32, false);
+                    renderedTexture.ReadPixels(new Rect(0, 0, ExportWidth, ExportHeight), 0, 0, false);
+                    renderedTexture.Apply();
+
+                    byte[] tga = renderedTexture.EncodeToTGA();
+                    string filename = Path.Combine(exportPath, work.FileName + "_NormalMap.tga");
+                    File.WriteAllBytes(filename, tga);
+                    work.CurrentStep++;
+                }
                 break;
             case WorkItem.Step.Complete:
                 workItems.RemoveAt(0);
