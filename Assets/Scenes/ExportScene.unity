@@ -405,11 +405,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e28099d7ba0d244084af946268f25b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FPS: 24
+  FPS: 15
   Camera: {fileID: 1119822855}
   ExportObject: {fileID: 313611331}
   ColorShader: {fileID: 0}
   NormalShader: {fileID: 4800000, guid: bdda4dfe9cd175b4bb05d223124c6d4f, type: 3}
+  ExportWidth: 192
+  ExportHeight: 192
 --- !u!4 &1910897011
 Transform:
   m_ObjectHideFlags: 0
